@@ -1,15 +1,27 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { UserCircle2, PlusCircle } from 'lucide-react';
 
 export function AgentNameSelect() {
-  const [agents] = useState(['Alice', 'Bob' , 'Cera' , 'Dan']);
+  //const [agents] = useState(['Alice', 'Bob' , 'Cera' , 'Dan']);
+   const [agents, setAgents] = useState([]);
   const [selected, setSelected] = useState('');
   const [newAgent, setNewAgent] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+  axios.get("http://localhost:5000/api/agents")
+    .then(res => {
+      setAgents(res.data);
+    })
+    .catch(err => {
+      console.error("Error fetching agents:", err);
+    });
+}, []);
 
   const handleSubmit = () => {
     if (!selected || (selected === 'notfound' && newAgent.trim() === '')) {
@@ -21,9 +33,9 @@ export function AgentNameSelect() {
     localStorage.setItem('agent', agentName);
     toast.success(`Welcome ${agentName}!`);
 
-    setTimeout(() => {
+    // setTimeout(() => {
       navigate('/agent/site');
-    }, 800);
+    // }, 800);
   };
 
   return (
@@ -33,7 +45,7 @@ export function AgentNameSelect() {
         <h2 className="text-2xl font-semibold mb-6 text-center">Select Your Name</h2>
 
         <div className="grid grid-cols-2 gap-4 mb-6">
-          {agents.map((name) => (
+          {agents.length > 0 ? agents.map((name) => (
             <motion.div
               key={name}
               whileTap={{ scale: 0.95 }}
@@ -45,7 +57,7 @@ export function AgentNameSelect() {
               <UserCircle2 size={36} className="text-purple-500" />
               <span className="font-medium text-gray-700">{name}</span>
             </motion.div>
-          ))}
+          )): <p className="text-gray-500 col-span-2">No agents found</p>}
 
           <motion.div
             whileTap={{ scale: 0.95 }}

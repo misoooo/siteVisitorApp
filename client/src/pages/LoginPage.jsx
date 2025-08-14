@@ -15,24 +15,26 @@ export function LoginPage() {
 
   const handleSubmit = () => {
     // ✅ Hardcoded login validation
-    const validEmail = 'agent@example.com';
-    const validPassword = 'abc';
+    const AgentEmail = 'agent@example.com';
+    const AgentPassword = 'abc';
 
+    const ManagerEmail = 'manager@example.com'
+    const ManagerPassword = 'abcd';
 
-    // console.log(form.email)
-    //   console.log(form.password)
-    if (form.email === validEmail && form.password === validPassword) {
-      // console.log(form.email)
-      // console.log(form.password)
+    if (form.email === AgentEmail && form.password === AgentPassword) {
       if (form.role === 'Agent') {
         localStorage.setItem('agentRole', form.role); // optional if you want role stored
         navigate('/agent/name'); // ✅ Redirect to agent name selection page
-      } else if (form.role === 'Manager') {
-        navigate('/dashboard'); // or wherever managers should go
       } else {
         toast.error('Please select a role');
       }
-    } else {
+    } else if(form.email == ManagerEmail && form.password == ManagerPassword){
+      if (form.role === 'Manager') {
+        localStorage.setItem('managerRole', form.role); // optional if you want role stored
+        navigate('manager/dashboard'); // or wherever managers should go
+    }
+  }
+    else {
       toast.error('Invalid email or password');
     }
   };
