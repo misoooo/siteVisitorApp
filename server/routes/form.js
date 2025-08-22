@@ -116,6 +116,7 @@ router.post("/submit", async (req, res) => {
     });
 
     res.status(200).json({ message: "Form submitted successfully" });
+    console.log("form.js")
   } catch (error) {
     console.error("Sheet append error:", error);
     res.status(500).json({ message: "Failed to write to sheet" });

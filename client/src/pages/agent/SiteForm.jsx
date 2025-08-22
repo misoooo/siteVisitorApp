@@ -648,14 +648,14 @@ useEffect(() => {
       <div>
         <h3 className="text-lg font-semibold mb-2">Primary Contact</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <CustomDropdown
+          <CustomDropdown required
             label="Select Role"
             value={form.role1}
             onChange={(val) => setForm({ ...form, role1: val })}
             options={roles}
           />
-          <input name="name1" placeholder="Name" className="input-field" value={form.name1} onChange={handleChange} />
-          <input name="phone1" placeholder="Phone" className="input-field" value={form.phone1} onChange={handleChange} />
+          <input required name="name1" placeholder="Name" className="input-field" value={form.name1} onChange={handleChange} />
+          <input required name="phone1" placeholder="Phone" className="input-field" value={form.phone1} onChange={handleChange} />
         </div>
       </div>
 
@@ -676,12 +676,12 @@ useEffect(() => {
       <div>
         <h3 className="text-lg font-semibold mb-2">Site Details</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <CustomDropdown label="Select Stage" value={form.stage} onChange={(val) => setForm({ ...form, stage: val })} options={stages} />
-          <CustomDropdown label="Visit Type" value={form.revisit} onChange={(val) => setForm({ ...form, revisit: val })} options={["Fresh", "Revisit"]} />
-          <input name="sqyd" placeholder="Size (sq. yd.)" className="input-field" value={form.sqyd} onChange={handleChange} />
-          <input name="area" placeholder="Area" className="input-field" value={form.area} onChange={handleChange} />
-          <input name="subArea" placeholder="Sub Area" className="input-field" value={form.subArea} onChange={handleChange} />
-          <input name="address" value={form.address} className="input-field bg-gray-100" readOnly />
+          <CustomDropdown required label="Select Stage" value={form.stage} onChange={(val) => setForm({ ...form, stage: val })} options={stages} />
+          <CustomDropdown required label="Visit Type" value={form.revisit} onChange={(val) => setForm({ ...form, revisit: val })} options={["Fresh", "Revisit"]} />
+          <input required name="sqyd" placeholder="Size (sq. yd.)" className="input-field" value={form.sqyd} onChange={handleChange} />
+          <input required name="area" placeholder="Area" className="input-field" value={form.area} onChange={handleChange} />
+          <input required name="subArea" placeholder="Sub Area" className="input-field" value={form.subArea} onChange={handleChange} />
+          <input required name="address" value={form.address} className="input-field bg-gray-100"  />
         </div>
       </div>
 

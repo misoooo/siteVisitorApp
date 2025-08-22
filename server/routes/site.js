@@ -353,7 +353,7 @@ router.get("/", async (req, res) => {
       range: "Sheet1!A1:Z",
     });
 
-    //console.log(response)
+    console.log(`home ${response}`)
     const rows = response.data.values;
     if (!rows || rows.length < 2) {
       return res.status(404).json({ message: "No site data found" });
@@ -436,7 +436,7 @@ router.get("/:siteId/latest", async (req, res) => {
     if (!siteRows.length) {
       return res.json({});
     }
-
+     console.log(`siteId-latest, ${res}`)
     // Sort by Date (descending)
     siteRows.sort((a, b) => new Date(b["Date"]) - new Date(a["Date"]));
 
@@ -487,9 +487,9 @@ router.get("/latest/:siteId", async (req, res) => {
     headers.forEach((header, idx) => {
       latestEntry[header] = latestRow[idx] || "";
     });
-
+     
     res.json(latestEntry);
-    console.log(latestEntry)
+    console.log("latest-siteId",latestEntry)
   } catch (err) {
     console.error("Error fetching latest site entry:", err);
     res.status(500).send("Failed to fetch latest site entry");
@@ -530,6 +530,7 @@ router.post("/submit", async (req, res) => {
     });
 
     res.status(200).json({ message: "Submitted successfully" });
+    console.log("site.js")
   } catch (error) {
     console.error("Error submitting form:", error);
     res.status(500).json({ message: "Submission failed" });
